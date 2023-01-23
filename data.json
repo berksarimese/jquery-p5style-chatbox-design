@@ -2,7 +2,20 @@
     "users": {
         "ren":{
             "name": "Ren",
-            "profile-picture": "/"
+            "image": "ren.png",
+            "color": "blue"
+        },
+
+        "futaba":{
+            "name": "Futaba",
+            "image": "futaba.png",
+            "color": "orange"
+        },
+
+        "teach":{
+            "name": "Teach",
+            "image": "teach.png",
+            "color": "green"
         }
     }
 }

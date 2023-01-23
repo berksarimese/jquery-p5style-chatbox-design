@@ -9,6 +9,7 @@ body {
 .main-container {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     width: 100vw;
     height: 100vh;
@@ -54,7 +55,7 @@ body {
 
 .message-container {
     position: relative;
-    display: flex;
+    display: block;
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
@@ -121,5 +122,26 @@ body {
     word-break:break-all;
     margin: 0px 10px;
     -webkit-clip-path: polygon(0 5%, 100% 0, 94% 100%, 0 96%); clip-path: polygon(0 5%, 100% 0, 94% 100%, 0 96%);
+}
+
+.text-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25rem;
+    height: 2rem;
+    background-color: #B50303;
+    margin-top: 10px;
+    padding: 2px;
+    box-sizing: border-box;
+    border: solid 5px black;
+    font-family: Helvetica;
+    font-weight: bold;
+    color: white;
+}
+
+.text-button:hover {
+    background-color: black;
+    cursor: pointer;
 }
 
