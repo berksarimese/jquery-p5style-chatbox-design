@@ -37,11 +37,39 @@ newMessage = "";
 
 let userElement = "";
 $(document).ready(function (){
-    
+
+    //SINGLE DELETE BUTTON
+    deleteFunction();
+    function deleteFunction(){
+    $('.message-row').mouseover(function(){
+        let rowContainer = this;
+        $(this).children('.box-cover').children('.message-delete-container').click(function(){
+            $(rowContainer).animate({marginLeft: '500px'}, function(){
+                $(this).remove();
+            });
+        });
+
+        $(this).children('.box-cover').children('.message-delete-container').css({
+            'height': '30px',
+            'width': '30px'
+        });
+    }).mouseout(function(){
+        $(this).children('.box-cover').children('.message-delete-container').css({
+            'height': '0px',
+            'width': '0px'
+        });
+    });}
+
+    //SCROLL ANIMATON
+    function scrollAnim (sHeight){
+        $('.message-scroll').animate({ scrollTop : sHeight}, 200);
+    }
+
+    //NEW MESSAGE BUTTON
     $(document).on('click', '.text-button', function(){
         console.log('buton logu');
-        let randomMsg = Math.floor((Math.random() * messages.length));
-        let randomUser = Math.floor((Math.random() * userList.length));
+        randomMsgNumber();
+        randomUserNumber();
         newMessage = `
         <div class="message-row">
         <div class="avatar-cover">
@@ -49,21 +77,42 @@ $(document).ready(function (){
                 <img src="${userList[randomUser].image}" class="avatar">
             </div>
         </div>
-        <div>
-            <div class="box-cover">
-                <div class="text-box">
-                    ${messages[randomMsg]}
-                </div>
+        <div class="box-cover">
+            <div class="message-delete-container">
+                <button class="delete-button-single">X</button>
+            </div>
+            <div class="text-box">
+                ${messages[randomMsg]}
             </div>
         </div>
     </div>
         `;
 
-        $(".message-container").append(newMessage);
-        var objDiv = document.querySelector(".message-container");
-        objDiv.scrollTop = objDiv.scrollHeight;
+        $(".message-scroll").append(newMessage);
         newMessage = "";
+        deleteFunction();
+        scrollAnim($('.message-scroll').prop("scrollHeight"));
+        
     });
 
-    
+    let randomMsgLast = 999;
+    let randomMsg = 1;
+    function randomMsgNumber (){
+        randomMsg = Math.floor((Math.random() * messages.length));
+        if(randomMsg == randomMsgLast) {
+            randomMsgNumber();
+        } else {
+            randomMsgLast = randomMsg;
+        }
+    }
+    let randomUserLast = 999;
+    let randomUser = 1;
+    function randomUserNumber (){
+        randomUser = Math.floor((Math.random() * userList.length));
+        if(randomUser == randomUserLast) {
+            randomUserNumber();
+        } else {
+            randomUserLast = randomUser;
+        }
+    }
 });
