@@ -38,10 +38,37 @@ newMessage = "";
 let userElement = "";
 $(document).ready(function (){
 
+    //MESSAGE SEND
+    
+    $('.text-message').keypress(function (key){ 
+        if(key.which == 13) {
+            newMessage = `
+            <div class="user-message-row">
+            <div class="user-box-cover">
+                <div class="message-delete-container">
+                    <button class="delete-button-single">X</button>
+                </div>
+                <div class="user-text-box">
+                    ${this.value}
+                </div>
+            </div>
+            <div class="me">-ME-</div>
+        </div>
+        `;
+
+        $(".message-scroll").append(newMessage);
+        newMessage = "";
+        deleteFunction();
+        scrollAnim($('.message-scroll').prop("scrollHeight"));
+        }
+    
+    });
+    
+
     //SINGLE DELETE BUTTON
     deleteFunction();
     function deleteFunction(){
-    $('.message-row').mouseover(function(){
+    $('.message-row').mouseover(function(){ //OTHER USERS
         let rowContainer = this;
         $(this).children('.box-cover').children('.message-delete-container').click(function(){
             $(rowContainer).animate({marginLeft: '500px'}, function(){
@@ -58,7 +85,27 @@ $(document).ready(function (){
             'height': '0px',
             'width': '0px'
         });
-    });}
+    });
+
+    $('.user-message-row').mouseover(function(){ //FOR USER
+        let rowContainer = this;
+        $(this).children('.user-box-cover').children('.message-delete-container').click(function(){
+            $(rowContainer).animate({marginLeft: '500px'}, function(){
+                $(this).remove();
+            });
+        });
+
+        $(this).children('.user-box-cover').children('.message-delete-container').css({
+            'height': '30px',
+            'width': '30px'
+        });
+    }).mouseout(function(){
+        $(this).children('.user-box-cover').children('.message-delete-container').css({
+            'height': '0px',
+            'width': '0px'
+        });
+    });
+}
 
     //SCROLL ANIMATON
     function scrollAnim (sHeight){
