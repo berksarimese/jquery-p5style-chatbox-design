@@ -298,3 +298,19 @@ body {
     width: 25rem;
 }
 
+@media only screen and (max-width: 750px) {
+
+    .chat-container {
+        height: 85vh;
+        width: 90%;
+    }
+
+    .text-box {
+        font-size: 10px;
+    }
+    
+    .user-text-box {
+        font-size: 10px;
+    }
+    
+  }
